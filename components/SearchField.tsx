@@ -1,7 +1,6 @@
 "use client";
 import React from "react";
 import { useState } from "react";
-import SearchIcon from "@mui/icons-material/Search";
 
 interface SearchFieldProps {
   handleSubmit: (query: string) => void;
@@ -31,9 +30,7 @@ export default function SearchField({ handleSubmit }: SearchFieldProps) {
           placeholder="Enter city name"
           className="w-full focus:outline-none bg-transparent "
         />
-        <button type="submit">
-          <SearchIcon />
-        </button>
+        <button type="submit">search</button>
       </form>
     </div>
   );

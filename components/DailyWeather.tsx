@@ -11,7 +11,7 @@ import WeeklyWeather from "./WeeklyWeather";
 export default function DailyWeather({ otherStyles }: { otherStyles: string }) {
   return (
     <div
-      className={`pt-5 border border-[#000] h-full flex flex-col justify-around items-center rounded-tl-[30px] rounded-bl-[30px] ${otherStyles}`}
+      className={`bg-[#e4f1ff] pt-5 h-full flex flex-col justify-around items-center rounded-tl-[30px] rounded-bl-[30px] ${otherStyles}`}
     >
       <WeeklyWeather />
       <div className="flex flex-wrap w-[950px] justify-center gap-8 ">

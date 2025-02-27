@@ -1,5 +1,6 @@
 import React from "react";
 import "../style/styles.css";
+import Navbar from "@/components/Navbar";
 
 export default function layout({ children }: { children: React.ReactNode }) {
   return (
@@ -18,7 +19,10 @@ export default function layout({ children }: { children: React.ReactNode }) {
           href="https://cdn-uicons.flaticon.com/2.6.0/uicons-solid-chubby/css/uicons-solid-chubby.css"
         />
       </head>
-      <body className="w-full h-[100vh] overflow-hidden">{children}</body>
+      <body className="w-full h-[100vh] overflow-hidden flex flex-col">
+        {children}
+        <Navbar />
+      </body>
     </html>
   );
 }
