@@ -6,7 +6,7 @@ export async function fetchWeather(query: string) {
   const API_URL = `${BASE_URL}/current.json?key=${API_KEY}&q=${query}`;
   try {
     const response = await fetch(API_URL);
-    if (!response.ok) throw new Error("Alert not found");
+    if (!response.ok) throw new Error("City not found");
 
     const data = await response.json();
     console.log(data);

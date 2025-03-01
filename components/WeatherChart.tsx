@@ -1,47 +1,94 @@
 "use client";
-import React from "react";
-import {
-  AreaChart,
-  Area,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip,
-  ResponsiveContainer,
-  ReferenceLine,
-} from "recharts";
 
-const rangeData = [
-  { day: "05-01", minTemp: 0, maxTemp: 10 },
-  { day: "05-02", minTemp: 0, maxTemp: 15 },
-  { day: "05-03", minTemp: 0, maxTemp: 12 },
-  { day: "05-04", minTemp: 0, maxTemp: 12 },
-  { day: "05-05", minTemp: 0, maxTemp: 16 },
-  { day: "05-06", minTemp: 0, maxTemp: 16 },
-  { day: "05-07", minTemp: 0, maxTemp: 12 },
-  { day: "05-08", minTemp: 0, maxTemp: 8 },
-  { day: "05-09", minTemp: 0, maxTemp: 5 },
+import { TrendingUp } from "lucide-react";
+import { Area, AreaChart, CartesianGrid, XAxis } from "recharts";
+
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import {
+  ChartConfig,
+  ChartContainer,
+  ChartTooltip,
+  ChartTooltipContent,
+} from "@/components/ui/chart";
+const chartData = [
+  { month: "January", desktop: 186 },
+  { month: "February", desktop: 305 },
+  { month: "March", desktop: 237 },
+  { month: "April", desktop: 73 },
+  { month: "May", desktop: 209 },
+  { month: "June", desktop: 214 },
 ];
 
-export default function WeatherChart() {
-  return (
-    <div className="w-[800px] h-[100px]">
-      <ResponsiveContainer>
-        <AreaChart data={rangeData}>
-          <XAxis dataKey="day" tick={false} />
+const chartConfig = {
+  desktop: {
+    label: "Desktop",
+    color: "hsl(var(--chart-1))",
+  },
+} satisfies ChartConfig;
 
-          {rangeData.map((entry, index) => (
-            <ReferenceLine
-              key={index}
-              x={entry.day}
-              stroke="#000"
-              strokeWidth={1}
+export function WeatherChart() {
+  return (
+    <Card>
+      <CardHeader className="hidden">
+        <CardTitle>Area Chart - Linear</CardTitle>
+        <CardDescription>
+          Showing total visitors for the last 6 months
+        </CardDescription>
+      </CardHeader>
+      <CardContent>
+        <ChartContainer
+          config={chartConfig}
+          className="max-h-[70px] w-full m-0 p-0 mt-5"
+        >
+          <AreaChart
+            accessibilityLayer
+            data={chartData}
+            margin={{
+              left: 12,
+              right: 12,
+            }}
+          >
+            <CartesianGrid vertical={true} horizontal={false} />
+            <XAxis
+              dataKey="month"
+              tickLine={false}
+              axisLine={false}
+              tickMargin={5}
+              tickFormatter={(value) => value.slice(0, 3)}
             />
-          ))}
-          <Area dataKey="maxTemp" stroke="#5e9ae9" fill="#5e9ae9" />
-          <Tooltip />
-        </AreaChart>
-      </ResponsiveContainer>
-    </div>
+            <ChartTooltip
+              cursor={false}
+              content={<ChartTooltipContent indicator="dot" hideLabel />}
+            />
+            <Area
+              dataKey="desktop"
+              type="linear"
+              fill="var(--color-desktop)"
+              fillOpacity={0.4}
+              stroke="var(--color-desktop)"
+            />
+          </AreaChart>
+        </ChartContainer>
+      </CardContent>
+      <CardFooter className="hidden">
+        <div className="flex w-full items-start gap-2 text-sm">
+          <div className="grid gap-2">
+            <div className="flex items-center gap-2 font-medium leading-none">
+              Trending up by 5.2% this month <TrendingUp className="h-4 w-4" />
+            </div>
+            <div className="flex items-center gap-2 leading-none text-muted-foreground">
+              January - June 2024
+            </div>
+          </div>
+        </div>
+      </CardFooter>
+    </Card>
   );
 }

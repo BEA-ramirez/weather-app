@@ -1,15 +1,21 @@
 "use client";
-import React from "react";
-import { useState } from "react";
-import { fetchWeather } from "@/utils/fetchWeather";
 
-import Navbar from "@/components/Navbar";
+import { useState, useEffect } from "react";
+import { fetchWeather } from "@/utils/fetchWeather";
+import { fetchWeatherForecast } from "@/utils/fetchWeatherForecast";
+import { getWeather } from "@/utils/getWeather";
+
+import MobileDaily from "@/components/MobileDaily";
+
+import { MobileCardProps } from "@/Types/interfaces";
 
 export default function page() {
   const [weather, setWeather] = useState<any>(null);
-
+  const [weatherConditions, setWeatherConditions] = useState<MobileCardProps[]>(
+    []
+  );
   const handleSearch = async (query: string) => {
-    const data = await fetchWeather(query);
+    const data = await fetchWeatherForecast(query);
     if (data) {
       setWeather(data);
       console.log(data);
@@ -18,26 +24,37 @@ export default function page() {
     }
   };
 
-  // return (
-  //   <div className="w-full h-full flex justify-between items-center bg-custom-bg bg-cover">
-  //     <div>
-  //       <button onClick={() => handleSearch("Philippines")}>Click</button>
-  //       {weather && (
-  //         <div className="mt-4 bg-gray-800 text-white p-4 rounded-lg">
-  //           <h2 className="text-xl">
-  //             {weather.location.name}, {weather.location.country}
-  //           </h2>
-  //           <p>Temperature: {weather.current.temp_c}°C</p>
-  //           <p>Condition: {weather.current.condition.text}</p>
-  //           <img src={weather.current.condition.icon} alt="Weather Icon" />
-  //         </div>
-  //       )}
-  //     </div>
-  //     <DailyWeather otherStyles="right-0" />
-  //   </div>
-  // );
+  useEffect(() => {
+    const fetchInitialData = async () => {
+      await handleSearch("Philippines");
+    };
+    fetchInitialData();
+  }, []);
+
+  useEffect(() => {
+    if (!weather) return; // Ensure weather is not null before calling getWeather
+
+    const updateWeatherConditions = async () => {
+      const conditions = await getWeather(weather);
+      setWeatherConditions(conditions);
+    };
+
+    updateWeatherConditions();
+  }, [weather]);
 
   return (
-    <div className="w-full h-full flex justify-center items-center "></div>
+    <div className="w-full h-full flex flex-col justify-center items-center ">
+      <div className="w-full h-full">
+        <h1>
+          {weather?.location?.name}, {weather?.location?.country}
+        </h1>
+        <p>{weather?.current?.temp_c}°</p>
+        <div>
+          <img src={weather?.current?.condition?.icon} alt="Weather Icon" />
+          <p>{weather?.current?.condition?.text}</p>
+        </div>
+      </div>
+      <MobileDaily values={weatherConditions} />
+    </div>
   );
 }

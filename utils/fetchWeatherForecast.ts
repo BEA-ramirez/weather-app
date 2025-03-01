@@ -3,7 +3,7 @@ export async function fetchWeatherForecast(query: string) {
   const BASE_URL = "https://api.weatherapi.com/v1";
   console.log("api key", API_KEY);
 
-  const API_URL = `${BASE_URL}/forecast.json?key=${API_KEY}&q=${query}&days=7`;
+  const API_URL = `${BASE_URL}/forecast.json?key=${API_KEY}&q=${query}&hour=7`;
   try {
     const response = await fetch(API_URL);
     if (!response.ok) throw new Error("City not found");
