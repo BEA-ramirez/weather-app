@@ -1,7 +1,15 @@
 "use client";
 
 import { TrendingUp } from "lucide-react";
-import { Area, AreaChart, CartesianGrid, XAxis } from "recharts";
+import {
+  Area,
+  AreaChart,
+  CartesianGrid,
+  XAxis,
+  YAxis,
+  ResponsiveContainer,
+} from "recharts";
+import { WeeklyForecastProps } from "@/Types/interfaces";
 
 import {
   Card,
@@ -17,23 +25,25 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from "@/components/ui/chart";
-const chartData = [
-  { month: "January", desktop: 186 },
-  { month: "February", desktop: 305 },
-  { month: "March", desktop: 237 },
-  { month: "April", desktop: 73 },
-  { month: "May", desktop: 209 },
-  { month: "June", desktop: 214 },
-];
 
 const chartConfig = {
-  desktop: {
-    label: "Desktop",
+  maxTemp_c: {
+    label: "Max Temp (°C)",
+    color: "hsl(var(--chart-2))",
+  },
+  minTemp_c: {
+    label: "Min Temp (°C)",
     color: "hsl(var(--chart-1))",
   },
 } satisfies ChartConfig;
 
-export function WeatherChart() {
+export function WeatherChart({
+  weeklyData,
+}: {
+  weeklyData: WeeklyForecastProps[];
+}) {
+  const minTemp = Math.min(...weeklyData.map((d) => d.minTemp_c)) - 2;
+  const maxTemp = Math.max(...weeklyData.map((d) => d.maxTemp_c)) + 2;
   return (
     <Card>
       <CardHeader className="hidden">
@@ -43,38 +53,53 @@ export function WeatherChart() {
         </CardDescription>
       </CardHeader>
       <CardContent>
-        <ChartContainer
-          config={chartConfig}
-          className="max-h-[70px] w-full m-0 p-0 mt-5"
-        >
-          <AreaChart
-            accessibilityLayer
-            data={chartData}
-            margin={{
-              left: 12,
-              right: 12,
-            }}
-          >
-            <CartesianGrid vertical={true} horizontal={false} />
-            <XAxis
-              dataKey="month"
-              tickLine={false}
-              axisLine={false}
-              tickMargin={5}
-              tickFormatter={(value) => value.slice(0, 3)}
-            />
-            <ChartTooltip
-              cursor={false}
-              content={<ChartTooltipContent indicator="dot" hideLabel />}
-            />
-            <Area
-              dataKey="desktop"
-              type="linear"
-              fill="var(--color-desktop)"
-              fillOpacity={0.4}
-              stroke="var(--color-desktop)"
-            />
-          </AreaChart>
+        <ChartContainer config={chartConfig} className="w-full h-[100px]">
+          <div className="w-full  h-[100px] bg-slate-400 ">
+            <ResponsiveContainer>
+              <AreaChart accessibilityLayer data={weeklyData}>
+                <CartesianGrid
+                  vertical={true}
+                  horizontal={false}
+                  strokeWidth={3}
+                  stroke="hsl(var(--chart-1))"
+                />
+                <XAxis
+                  dataKey="date"
+                  tickLine={false}
+                  axisLine={false}
+                  tickMargin={5}
+                  stroke="gray"
+                />
+                <YAxis
+                  tickLine={false}
+                  axisLine={false}
+                  domain={[minTemp, maxTemp]}
+                  stroke="gray"
+                />
+                <ChartTooltip
+                  cursor={false}
+                  content={<ChartTooltipContent indicator="dot" hideLabel />}
+                />
+                <Area
+                  dataKey="minTemp_c"
+                  type="monotone"
+                  strokeWidth={3}
+                  stroke="hsl(var(--chart-1))"
+                  fill="hsl(var(--chart-1))"
+                  fillOpacity={0.3}
+                />
+
+                <Area
+                  dataKey="maxTemp_c"
+                  type="monotone"
+                  strokeWidth={3}
+                  stroke="hsl(var(--chart-2))"
+                  fill="hsl(var(--chart-2))"
+                  fillOpacity={0.3}
+                />
+              </AreaChart>
+            </ResponsiveContainer>
+          </div>
         </ChartContainer>
       </CardContent>
       <CardFooter className="hidden">

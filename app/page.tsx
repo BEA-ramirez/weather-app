@@ -4,16 +4,30 @@ import { useState, useEffect } from "react";
 import { fetchWeather } from "@/utils/fetchWeather";
 import { fetchWeatherForecast } from "@/utils/fetchWeatherForecast";
 import { getWeather } from "@/utils/getWeather";
+import getHourlyForecast from "@/utils/getHourlyForecast";
+import getWeeklyForecast from "@/utils/getWeeklyForecast";
 
 import MobileDaily from "@/components/MobileDaily";
 
-import { MobileCardProps } from "@/Types/interfaces";
+import {
+  HourlyForecastProps,
+  WeeklyForecastProps,
+  MobileCardProps,
+} from "@/Types/interfaces";
 
-export default function page() {
+export default function Page() {
   const [weather, setWeather] = useState<any>(null);
   const [weatherConditions, setWeatherConditions] = useState<MobileCardProps[]>(
     []
   );
+  const [hourlyForecast, setHourlyForecast] = useState<HourlyForecastProps[]>(
+    []
+  );
+  const [weeklyForecast, setWeeklyForecast] = useState<WeeklyForecastProps[]>(
+    []
+  );
+  const [location, setLocation] = useState<string>("Philippines");
+
   const handleSearch = async (query: string) => {
     const data = await fetchWeatherForecast(query);
     if (data) {
@@ -25,10 +39,7 @@ export default function page() {
   };
 
   useEffect(() => {
-    const fetchInitialData = async () => {
-      await handleSearch("Philippines");
-    };
-    fetchInitialData();
+    handleSearch(location);
   }, []);
 
   useEffect(() => {
@@ -39,8 +50,29 @@ export default function page() {
       setWeatherConditions(conditions);
     };
 
+    const updateHourlyForecast = () => {
+      const forecast = getHourlyForecast(weather);
+      setHourlyForecast(forecast);
+    };
+
+    const updateWeeklyForecast = () => {
+      const week = getWeeklyForecast(weather);
+      setWeeklyForecast(week);
+    };
+
     updateWeatherConditions();
+    updateHourlyForecast();
+    updateWeeklyForecast();
   }, [weather]);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      console.log("Updating weather forecast");
+      handleSearch(location);
+    }, 6 * 60 * 60 * 1000);
+
+    return () => clearInterval(interval);
+  });
 
   return (
     <div className="w-full h-full flex flex-col justify-center items-center ">
@@ -54,7 +86,11 @@ export default function page() {
           <p>{weather?.current?.condition?.text}</p>
         </div>
       </div>
-      <MobileDaily values={weatherConditions} />
+      <MobileDaily
+        values={weatherConditions}
+        hourlyForecast={hourlyForecast}
+        weeklyForecast={weeklyForecast}
+      />
     </div>
   );
 }

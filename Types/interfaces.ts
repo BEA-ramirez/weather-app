@@ -9,3 +9,15 @@ export interface MobileCardProps {
   unit: string;
   value: number;
 }
+
+export interface HourlyForecastProps {
+  time: string;
+  icon: string;
+  condition: string;
+}
+
+export interface WeeklyForecastProps {
+  maxTemp_c: number;
+  minTemp_c: number;
+  date: string;
+}
