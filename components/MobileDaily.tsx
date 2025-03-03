@@ -1,21 +1,25 @@
 import React from "react";
 import MobileCard from "./MobileCard";
 import { WeatherChart } from "./WeatherChart";
+import { SampleChart } from "./SampleChart";
 
 import {
   MobileCardProps,
   HourlyForecastProps,
   WeeklyForecastProps,
+  TemperatureProps,
 } from "@/Types/interfaces";
 
 export default function MobileDaily({
   values,
   hourlyForecast,
   weeklyForecast,
+  tempForecast,
 }: {
   values: MobileCardProps[];
   hourlyForecast: HourlyForecastProps[];
   weeklyForecast: WeeklyForecastProps[];
+  tempForecast: TemperatureProps[];
 }) {
   return (
     <div className="w-full">
@@ -28,10 +32,9 @@ export default function MobileDaily({
             </div>
           );
         })}
-
-        <div className="col-span-6 w-full">
-          <WeatherChart weeklyData={weeklyForecast} />
-        </div>
+      </div>
+      <div className="w-full  mr-0 pr-0">
+        <SampleChart tempData={tempForecast} />
       </div>
       <div className="w-full p-5 border grid grid-cols-4 justify-items-center gap-2">
         {values.map((value: MobileCardProps, index) => {

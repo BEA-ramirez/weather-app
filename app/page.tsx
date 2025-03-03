@@ -6,6 +6,8 @@ import { fetchWeatherForecast } from "@/utils/fetchWeatherForecast";
 import { getWeather } from "@/utils/getWeather";
 import getHourlyForecast from "@/utils/getHourlyForecast";
 import getWeeklyForecast from "@/utils/getWeeklyForecast";
+import getMinMaxTemp from "@/utils/getMinMaxTemp";
+import { TemperatureProps, PageProps } from "@/Types/interfaces";
 
 import MobileDaily from "@/components/MobileDaily";
 
@@ -15,7 +17,7 @@ import {
   MobileCardProps,
 } from "@/Types/interfaces";
 
-export default function Page() {
+export default function Page({ activeTab, setActiveTab }: PageProps) {
   const [weather, setWeather] = useState<any>(null);
   const [weatherConditions, setWeatherConditions] = useState<MobileCardProps[]>(
     []
@@ -26,6 +28,7 @@ export default function Page() {
   const [weeklyForecast, setWeeklyForecast] = useState<WeeklyForecastProps[]>(
     []
   );
+  const [tempForecast, setTempForecast] = useState<TemperatureProps[]>([]);
   const [location, setLocation] = useState<string>("Philippines");
 
   const handleSearch = async (query: string) => {
@@ -55,14 +58,14 @@ export default function Page() {
       setHourlyForecast(forecast);
     };
 
-    const updateWeeklyForecast = () => {
-      const week = getWeeklyForecast(weather);
-      setWeeklyForecast(week);
+    const updateMinMaxChart = () => {
+      const hour = getMinMaxTemp(weather);
+      setTempForecast(hour);
     };
 
     updateWeatherConditions();
     updateHourlyForecast();
-    updateWeeklyForecast();
+    updateMinMaxChart();
   }, [weather]);
 
   useEffect(() => {
@@ -90,6 +93,7 @@ export default function Page() {
         values={weatherConditions}
         hourlyForecast={hourlyForecast}
         weeklyForecast={weeklyForecast}
+        tempForecast={tempForecast}
       />
     </div>
   );

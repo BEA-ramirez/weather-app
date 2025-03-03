@@ -21,3 +21,13 @@ export interface WeeklyForecastProps {
   minTemp_c: number;
   date: string;
 }
+
+export interface TemperatureProps {
+  feelsLike_c: number;
+  time: string;
+}
+
+export interface PageProps {
+  activeTab: number;
+  setActiveTab: (num: number) => void;
+}

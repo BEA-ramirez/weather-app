@@ -1,8 +1,20 @@
+"use client";
 import React from "react";
 import "../style/styles.css";
 import Navbar from "@/components/Navbar";
+import { useState } from "react";
+import { PageProps } from "@/Types/interfaces";
 
-export default function layout({ children }: { children: React.ReactNode }) {
+interface LayoutProps {
+  children: React.ReactElement<PageProps>; // Specify that children must be a ReactElement with PageProps
+}
+
+export default function layout({ children }: LayoutProps) {
+  const [activeTab, setActiveTab] = useState<number>(1);
+  const handleActiveTab = (num: number) => {
+    setActiveTab(num);
+  };
+
   return (
     <html>
       <head>
@@ -21,7 +33,7 @@ export default function layout({ children }: { children: React.ReactNode }) {
       </head>
       <body className="w-full h-[100vh] overflow-hidden flex flex-col">
         {children}
-        <Navbar />
+        <Navbar activeTab={activeTab} setActiveTab={handleActiveTab} />
       </body>
     </html>
   );
