@@ -8,10 +8,12 @@ export default function getWeeklyForecast(weather: any) {
   const weeklyForecast = forecasts.map((daily: any) => ({
     maxTemp_c: daily.day.maxtemp_c,
     minTemp_c: daily.day.mintemp_c,
-    date: new Date(daily.date).toLocaleDateString("en-US", {
-      month: "2-digit",
-      day: "2-digit",
+    day: new Date(daily.date).toLocaleDateString("en-US", {
+      weekday: "short",
     }),
+    icon: daily.day.condition.icon,
+    condition: daily.day.condition.text,
+    chance: daily.day.daily_chance_of_rain,
   }));
   console.log(weeklyForecast);
   return weeklyForecast;

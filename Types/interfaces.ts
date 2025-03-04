@@ -19,7 +19,10 @@ export interface HourlyForecastProps {
 export interface WeeklyForecastProps {
   maxTemp_c: number;
   minTemp_c: number;
-  date: string;
+  day: string;
+  icon: string;
+  condition: string;
+  chance: number;
 }
 
 export interface TemperatureProps {

@@ -1,9 +1,11 @@
 import { PageProps } from "@/Types/interfaces";
 import React from "react";
+import { useNavBarContext } from "@/contexts/NavContextProvider";
 
-export default function Navbar({ activeTab, setActiveTab }: PageProps) {
+export default function Navbar() {
+  const { activeTab, setActiveTab } = useNavBarContext();
   return (
-    <div className="w-full h-[80px] flex border justify-evenly">
+    <div className="w-full h-[80px] flex border justify-evenly md:hidden">
       <button
         className={`hover:bg-slate-400 w-full ${
           activeTab === 1 ? "bg-slate-400" : ""

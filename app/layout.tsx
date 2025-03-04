@@ -4,17 +4,13 @@ import "../style/styles.css";
 import Navbar from "@/components/Navbar";
 import { useState } from "react";
 import { PageProps } from "@/Types/interfaces";
+import NavContextProvider from "@/contexts/NavContextProvider";
 
 interface LayoutProps {
-  children: React.ReactElement<PageProps>; // Specify that children must be a ReactElement with PageProps
+  children: React.ReactNode; // Specify that children must be a ReactElement with PageProps
 }
 
 export default function layout({ children }: LayoutProps) {
-  const [activeTab, setActiveTab] = useState<number>(1);
-  const handleActiveTab = (num: number) => {
-    setActiveTab(num);
-  };
-
   return (
     <html>
       <head>
@@ -31,9 +27,13 @@ export default function layout({ children }: LayoutProps) {
           href="https://cdn-uicons.flaticon.com/2.6.0/uicons-solid-chubby/css/uicons-solid-chubby.css"
         />
       </head>
-      <body className="w-full h-[100vh] overflow-hidden flex flex-col">
-        {children}
-        <Navbar activeTab={activeTab} setActiveTab={handleActiveTab} />
+      <body className="w-full h-[100vh] overflow-hidden flex flex-col justify-end">
+        <NavContextProvider>
+          <div>{children}</div>
+          <div className="">
+            <Navbar />
+          </div>
+        </NavContextProvider>
       </body>
     </html>
   );
