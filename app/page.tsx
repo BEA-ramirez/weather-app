@@ -12,7 +12,8 @@ import { TemperatureProps, PageProps } from "@/Types/interfaces";
 import { useNavBarContext } from "@/contexts/NavContextProvider";
 import ForecastCard from "@/components/ForecastCard";
 import AlertCard from "@/components/AlertCard";
-
+import SearchField from "@/components/SearchField";
+import SearchPop from "@/components/SearchPop";
 import MobileDaily from "@/components/MobileDaily";
 
 import {
@@ -20,6 +21,8 @@ import {
   WeeklyForecastProps,
   MobileCardProps,
 } from "@/Types/interfaces";
+
+import { Navigation } from "lucide-react";
 
 export default function Page() {
   const [weather, setWeather] = useState<any>(null);
@@ -40,6 +43,8 @@ export default function Page() {
   const handleSearch = async (query: string) => {
     const data = await fetchWeatherForecast(query);
     const alerts = await fetchWeatherAlerts(query);
+
+    setLocation(query);
     if (data) {
       setWeather(data);
       console.log(data);
@@ -54,6 +59,10 @@ export default function Page() {
       console.log("Error no alerts found");
     }
   };
+
+  const formattedDate = new Date(
+    weather?.location?.localtime
+  ).toLocaleDateString("en-GB", { day: "numeric", month: "short" });
 
   useEffect(() => {
     handleSearch(location);
@@ -100,23 +109,40 @@ export default function Page() {
   if (activeTab === 2) {
     return (
       <div>
-        <ForecastCard data={weeklyForecast[0]} />
+        {weeklyForecast &&
+          weeklyForecast.map((forecast, index) => (
+            <ForecastCard data={forecast} key={index} />
+          ))}
       </div>
     );
   }
 
   if (activeTab === 1) {
     return (
-      <div className="w-full h-full flex flex-col justify-center items-center ">
-        <div className="w-full h-full">
-          <h1>
-            {weather?.location?.name}, {weather?.location?.country}
+      <div className="w-full h-full flex flex-col justify-center items-center  ">
+        <div className="w-full h-[16rem] mb-[-32px] bg-custom bg-cover px-4 pt-4 flex flex-col justify-start">
+          <h1 className="text-[11px] flex items-center gap-1 mt-3 mb-5 justify-between">
+            <div className="flex items-center gap-1">
+              <Navigation size={10} />
+              {weather?.location?.name}, {weather?.location?.country}
+            </div>
+            <SearchPop handleSubmit={handleSearch} />
           </h1>
-          <p>{weather?.current?.temp_c}°</p>
-          <div>
-            <img src={weather?.current?.condition?.icon} alt="Weather Icon" />
-            <p>{weather?.current?.condition?.text}</p>
+
+          <p className="text-5xl">{weather?.current?.temp_c}°</p>
+          <div className="flex items-center justify-start ">
+            <img
+              src={weather?.current?.condition?.icon}
+              alt="Weather Icon"
+              className="w-8"
+            />
+            <p className="text-[#e5e5e8]">
+              {weather?.current?.condition?.text}
+            </p>
           </div>
+          <p className="ml-2 text-[11px] mt-[-6px] text-[#e5e5e8]">
+            Today {formattedDate}
+          </p>
         </div>
         <MobileDaily
           values={weatherConditions}
@@ -131,7 +157,9 @@ export default function Page() {
   if (activeTab === 3) {
     return (
       <div>
-        <AlertCard alert={weatherAlerts.alerts.alert[0]} />
+        {weatherAlerts.alerts.alert[0] && (
+          <AlertCard alert={weatherAlerts.alerts.alert[0]} />
+        )}
       </div>
     );
   }

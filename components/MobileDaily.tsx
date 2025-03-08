@@ -22,21 +22,28 @@ export default function MobileDaily({
   tempForecast: TemperatureProps[];
 }) {
   return (
-    <div className="w-full">
-      <div className="w-full p-5 border grid grid-cols-6 justify-items-center gap-2">
+    <div className="w-full  rounded-[40px] flex flex-col justify-center items-center  bg-[#fffffa]">
+      <div className="w-[90%] p-5 grid grid-cols-6 justify-items-center gap-6">
         {hourlyForecast.map((forecast: HourlyForecastProps, index) => {
           return (
-            <div className="w-[45px] h-[45px] border" key={index}>
+            <div
+              className="w-[50px] h-[50px] flex flex-col justify-center items-center"
+              key={index}
+            >
               <p className="text-[10px]">{forecast?.time}</p>
-              <img src={forecast?.icon} alt={forecast?.condition} />
+              <img
+                src={forecast?.icon}
+                alt={forecast?.condition}
+                className="w-[40px]"
+              />
             </div>
           );
         })}
       </div>
-      <div className="w-full  mr-0 pr-0">
+      <div className="w-full  mr-0 pr-0 ">
         <SampleChart tempData={tempForecast} />
       </div>
-      <div className="w-full p-5 border grid grid-cols-4 justify-items-center gap-2">
+      <div className="w-full p-5 grid grid-cols-4 justify-items-center gap-y-5">
         {values.map((value: MobileCardProps, index) => {
           return (
             <MobileCard

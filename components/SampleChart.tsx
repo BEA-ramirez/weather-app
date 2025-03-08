@@ -30,7 +30,7 @@ import {
 const chartConfig = {
   feelsLike_c: {
     label: "Temperature (°C) ",
-    color: "hsl(var(--chart-2))",
+    color: "hsl(var(--chart-6))",
   },
 } satisfies ChartConfig;
 
@@ -51,7 +51,7 @@ export function SampleChart({ tempData }: { tempData: TemperatureProps[] }) {
           bottom: 0,
         }}
       >
-        <CartesianGrid vertical={true} horizontal={false} stroke="#000" />
+        <CartesianGrid vertical={true} horizontal={false} stroke="#89a5a0" />
         <XAxis
           dataKey="time"
           tickLine={false}
@@ -69,9 +69,9 @@ export function SampleChart({ tempData }: { tempData: TemperatureProps[] }) {
         <Area
           dataKey="feelsLike_c"
           type="linear"
-          fill="var(--color-desktop)"
+          fill="hsl(172, 30%, 44%)"
           fillOpacity={0.4}
-          stroke="var(--color-desktop)"
+          stroke="hsl(172, 30%, 44%)"
         />
       </AreaChart>
     </ChartContainer>

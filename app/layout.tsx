@@ -26,13 +26,16 @@ export default function layout({ children }: LayoutProps) {
           rel="stylesheet"
           href="https://cdn-uicons.flaticon.com/2.6.0/uicons-solid-chubby/css/uicons-solid-chubby.css"
         />
+        <link
+          rel="stylesheet"
+          href="https://cdn-uicons.flaticon.com/2.6.0/uicons-bold-rounded/css/uicons-bold-rounded.css"
+        ></link>
       </head>
-      <body className="w-full h-[100vh] overflow-hidden flex flex-col justify-end">
+      <body className="w-full h-[100vh] overflow-hidden flex flex-col relative">
         <NavContextProvider>
           <div>{children}</div>
-          <div className="">
-            <Navbar />
-          </div>
+
+          <Navbar />
         </NavContextProvider>
       </body>
     </html>
