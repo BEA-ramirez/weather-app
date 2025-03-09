@@ -15,6 +15,8 @@ import AlertCard from "@/components/AlertCard";
 import SearchField from "@/components/SearchField";
 import SearchPop from "@/components/SearchPop";
 import MobileDaily from "@/components/MobileDaily";
+import { ScrollArea } from "@/components/ui/scroll-area";
+import DailyWeather from "@/components/DailyWeather";
 
 import {
   HourlyForecastProps,
@@ -108,19 +110,45 @@ export default function Page() {
 
   if (activeTab === 2) {
     return (
-      <div>
-        {weeklyForecast &&
-          weeklyForecast.map((forecast, index) => (
-            <ForecastCard data={forecast} key={index} />
-          ))}
+      <div className="w-full h-full flex flex-col justify-center items-center  ">
+        <div className="w-full h-[16rem] mb-[-32px] bg-custom bg-cover px-4 pt-4 flex flex-col justify-start">
+          <h1 className="text-[11px] flex items-center gap-1 mt-3 mb-5 justify-between">
+            <div className="flex items-center gap-1">
+              <Navigation size={10} />
+              {weather?.location?.name}, {weather?.location?.country}
+            </div>
+            <SearchPop handleSubmit={handleSearch} />
+          </h1>
+
+          <p className="text-5xl">{weather?.current?.temp_c}°</p>
+          <div className="flex items-center justify-start ">
+            <img
+              src={weather?.current?.condition?.icon}
+              alt="Weather Icon"
+              className="w-8"
+            />
+            <p className="text-[#e5e5e8]">
+              {weather?.current?.condition?.text}
+            </p>
+          </div>
+          <p className="ml-2 text-[11px] mt-[-6px] text-[#e5e5e8]">
+            Today {formattedDate}
+          </p>
+        </div>
+        <ScrollArea className="w-full  rounded-[40px] h-[400px] bg-[#fffffa]">
+          {weeklyForecast &&
+            weeklyForecast.map((forecast, index) => (
+              <ForecastCard data={forecast} key={index} />
+            ))}
+        </ScrollArea>
       </div>
     );
   }
 
   if (activeTab === 1) {
     return (
-      <div className="w-full h-full flex flex-col justify-center items-center  ">
-        <div className="w-full h-[16rem] mb-[-32px] bg-custom bg-cover px-4 pt-4 flex flex-col justify-start">
+      <div className="w-full h-full flex flex-col justify-center items-center md:items-start">
+        <div className="md:h-[100vh] md:w-[25rem] w-full h-[16rem] md:bg- mb-[-32px] bg-custom bg-cover px-4 pt-4 flex flex-col justify-start">
           <h1 className="text-[11px] flex items-center gap-1 mt-3 mb-5 justify-between">
             <div className="flex items-center gap-1">
               <Navigation size={10} />
@@ -150,16 +178,52 @@ export default function Page() {
           weeklyForecast={weeklyForecast}
           tempForecast={tempForecast}
         />
+        <DailyWeather otherStyles="sm:hidden md:display" />
       </div>
     );
   }
 
   if (activeTab === 3) {
     return (
-      <div>
-        {weatherAlerts.alerts.alert[0] && (
-          <AlertCard alert={weatherAlerts.alerts.alert[0]} />
-        )}
+      <div className="w-full h-full flex flex-col justify-center items-center  ">
+        <div className="w-full h-[16rem] mb-[-32px] md:bg-center bg-custom bg-cover px-4 pt-4 flex flex-col justify-start">
+          <h1 className="text-[11px] flex items-center gap-1 mt-3 mb-5 justify-between">
+            <div className="flex items-center gap-1">
+              <Navigation size={10} />
+              {weather?.location?.name}, {weather?.location?.country}
+            </div>
+            <SearchPop handleSubmit={handleSearch} />
+          </h1>
+
+          <p className="text-5xl">{weather?.current?.temp_c}°</p>
+          <div className="flex items-center justify-start ">
+            <img
+              src={weather?.current?.condition?.icon}
+              alt="Weather Icon"
+              className="w-8"
+            />
+            <p className="text-[#e5e5e8]">
+              {weather?.current?.condition?.text}
+            </p>
+          </div>
+          <p className="ml-2 text-[11px] mt-[-6px] text-[#e5e5e8]">
+            Today {formattedDate}
+          </p>
+        </div>
+
+        <ScrollArea className="w-full rounded-[40px] h-[400px] bg-[#fffffa] shadow-lg pb-8 ">
+          {weatherAlerts.alerts.alert.length === 0 && (
+            <div className="w-full h-[400px] font-semibold flex justify-center items-center">
+              No alerts found
+            </div>
+          )}
+          <div className="flex flex-col justify-center items-center mt-6">
+            {weatherAlerts.alerts.alert &&
+              weatherAlerts.alerts.alert.map((alert: any, index: number) => (
+                <AlertCard alert={alert} key={index} />
+              ))}
+          </div>
+        </ScrollArea>
       </div>
     );
   }

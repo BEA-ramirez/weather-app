@@ -22,7 +22,7 @@ export default function MobileDaily({
   tempForecast: TemperatureProps[];
 }) {
   return (
-    <div className="w-full  rounded-[40px] flex flex-col justify-center items-center  bg-[#fffffa]">
+    <div className="w-full  rounded-[40px] flex flex-col justify-center items-center  bg-[#fffffa] md:hidden">
       <div className="w-[90%] p-5 grid grid-cols-6 justify-items-center gap-6">
         {hourlyForecast.map((forecast: HourlyForecastProps, index) => {
           return (

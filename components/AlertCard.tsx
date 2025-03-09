@@ -2,13 +2,20 @@ import React from "react";
 
 export default function AlertCard({ alert }: any) {
   return (
-    <div className="flex flex-col border">
-      <h2>
+    <div className="w-[90%] flex flex-col border mb-4 p-5 rounded-lg bg-[#afdac6]">
+      <h2 className="w-fit text-[13px]  rounded-full bg-[#137773] px-2 mb-3 font-semibold uppercase text-[#f7f1d0]">
         {alert.msgtype}: {alert.event}
       </h2>
-      <h1>{alert.headline}</h1>
-      <p>{alert.desc}</p>
-      <p>{alert.instruction}</p>
+      <h1 className="text-[12px]  font-bold text-justify uppercase mb-5 ">
+        {alert.headline}
+      </h1>
+      <p className="text-[13px] border border-green-300 text-justify mb-2">
+        {alert.desc}
+      </p>
+      <div className="p-2 rounded-md bg-[#4e9087]">
+        <p className="text-[11px] font-bold">Instructions:</p>
+        <p className="text-[11px]  text-justify">{alert.instruction}</p>
+      </div>
     </div>
   );
 }

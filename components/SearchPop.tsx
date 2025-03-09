@@ -32,7 +32,7 @@ export default function SearchPop({ handleSubmit }: SearchFieldProps) {
           <Search />
         </Button>
       </PopoverTrigger>
-      <PopoverContent className="h-[200px]">
+      <PopoverContent className="h-[200px] w-[250px]">
         <SearchField handleSubmit={handleSubmit} />
       </PopoverContent>
     </Popover>

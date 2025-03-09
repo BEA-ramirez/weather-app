@@ -13,6 +13,7 @@ export default function DailyWeather({ otherStyles }: { otherStyles: string }) {
     <div
       className={`bg-[#e4f1ff] pt-5 h-full flex flex-col justify-around items-center rounded-tl-[30px] rounded-bl-[30px] ${otherStyles}`}
     >
+      <p>hello</p>
       <WeeklyWeather />
       <div className="flex flex-wrap w-[950px] justify-center gap-8 ">
         <WindCard />

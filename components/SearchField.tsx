@@ -3,7 +3,7 @@ import { fetchSearchLocation } from "@/utils/fetchSearchLocation";
 import React, { useEffect } from "react";
 import { useState } from "react";
 import { Search } from "lucide-react";
-
+import { Separator } from "./ui/separator";
 import {
   Command,
   CommandEmpty,
@@ -14,6 +14,7 @@ import {
   CommandSeparator,
   CommandShortcut,
 } from "@/components/ui/command";
+import { ScrollArea } from "./ui/scroll-area";
 
 interface SearchFieldProps {
   handleSubmit: (query: string) => void;
@@ -64,33 +65,38 @@ export default function SearchField({ handleSubmit }: SearchFieldProps) {
   };
 
   return (
-    <div className=" bg-slate-500 flex flex-col gap-2 p-2  relative">
+    <div className=" flex flex-col gap-2 relative h-40 ">
       <form
         onSubmit={onSubmit}
-        className="flex flex-row justify-between w-full mx-2"
+        className="flex flex-row justify-between w-full border-0"
       >
         <input
           type="text"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
-          placeholder="Enter city name"
-          className="w-full focus:outline-none bg-transparent"
+          placeholder="Enter location"
+          className="text-[14px] border rounded-md p-1 w-[87%] focus:outline-none outline-none"
         />
-        <button type="submit">Search</button>
+        <button type="submit" className="w-6">
+          <Search size={20} />
+        </button>
       </form>
-      {loading && <div>Loading suggestions...</div>}
+      {loading && <div className="text-[13px]">Loading suggestions...</div>}
       {suggestions.length > 0 && (
-        <ul className="absolute z-10 bg-white border border-gray-300 w-full max-h-60 overflow-y-auto">
-          {suggestions.map((suggestion, index) => (
-            <li
-              key={index}
-              onClick={() => handleSuggestionClick(suggestion)}
-              className="p-2 hover:bg-gray-200 cursor-pointer"
-            >
-              {suggestion}
-            </li>
-          ))}
-        </ul>
+        <ScrollArea className="h-[300px] pb-8">
+          <ul className=" absolute z-10 bg-white  border-gray-300 w-full max-h-60 overflow-y-auto">
+            {suggestions.map((suggestion, index) => (
+              <li
+                key={index}
+                onClick={() => handleSuggestionClick(suggestion)}
+                className="flex flex-col justify-center items-center w-[87%] h-[40px] p-2 hover:bg-gray-200 cursor-pointer text-[12px] "
+              >
+                {suggestion}
+                <Separator orientation="horizontal" />
+              </li>
+            ))}
+          </ul>
+        </ScrollArea>
       )}
     </div>
   );

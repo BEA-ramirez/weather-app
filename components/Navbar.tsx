@@ -50,7 +50,14 @@ export default function Navbar() {
             } 
           focus:text-black focus:outline-none`}
           />
-          <p className="text-[12px] mt-1 ">Alerts</p>
+          <p
+            className={`text-[12px] mt-1 text-[#8b8b8b] ${
+              activeTab === 3 ? "text-black" : "text-[#8b8b8b]"
+            } 
+          focus:text-black focus:outline-none`}
+          >
+            Alerts
+          </p>
         </button>
       </div>
     </div>
