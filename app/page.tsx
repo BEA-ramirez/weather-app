@@ -148,7 +148,7 @@ export default function Page() {
   if (activeTab === 1) {
     return (
       <div className="w-full h-full flex md:flex-row flex-col justify-center items-center md:items-start md:justify-start">
-        <div className="md:h-[100vh] md:w-[18rem] md:mr-[-3rem] w-full h-[16rem] mb-[-3rem] bg-custom bg-cover px-4 pt-4 flex flex-col justify-start ">
+        <div className="md:h-[100vh] md:w-[18rem] md:mr-[-3rem] lg:mr-[-2rem] lg:w-[22rem] w-full h-[16rem] mb-[-3rem] bg-custom md:bg-center bg-cover px-4 pt-4 flex flex-col justify-start ">
           <h1 className="text-[0.6rem] flex items-center gap-1 mt-3 mb-5 justify-between md:hidden">
             <div className="flex items-center gap-1 mr-3">
               <Navigation size={10} />
@@ -156,23 +156,30 @@ export default function Page() {
             </div>
             <SearchPop handleSubmit={handleSearch} />
           </h1>
+          <div className="hidden md:block">
+            <SearchPop handleSubmit={handleSearch} />
+          </div>
 
-          <h1 className="w-[9rem] text-[0.6rem] hidden items-center gap-1 mt-3 mb-5 justify-between md:block">
+          <h1 className=" w-[9rem] text-[0.6rem] hidden items-center gap-1 mt-3  justify-between md:block">
             <div className="flex items-center gap-1 mr-3">
               <Navigation size={20} />
               {weather?.location?.name}, {weather?.location?.country}
             </div>
           </h1>
-          <p className="text-5xl md:ml-9 md:text-[3.5rem]">
+          <p className="text-[0.6rem]  text-[#000] hidden md:block">
+            Today {formattedDate}
+          </p>
+
+          <p className="text-5xl md:ml-9 md:mt-16 md:text-[3.5rem] md:text-[#fff]">
             {weather?.current?.temp_c}°
           </p>
-          <div className="flex items-center justify-start md:mt-3">
+          <div className="flex items-center justify-center md:justify-start md:ml-[2rem] md:mt-3">
             <img
               src={weather?.current?.condition?.icon}
               alt="Weather Icon"
               className="w-8"
             />
-            <p className="text-[#e5e5e8] md:text-[#000] ">
+            <p className="text-[#e5e5e8] md:text-[#fff] ">
               {weather?.current?.condition?.text}
             </p>
           </div>
@@ -192,6 +199,7 @@ export default function Page() {
           values={weatherConditions}
           hourlyForecast={hourlyForecast}
           weeklyForecast={weeklyForecast}
+          weather={weather}
         />
       </div>
     );

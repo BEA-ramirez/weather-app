@@ -7,7 +7,7 @@ export default function WeatherCard({
   children,
 }: WeatherCardProps) {
   return (
-    <div className="w-[10rem] h-[7rem] rounded-[1.875rem] shadow-md bg-[#fffffa]">
+    <div className="flex-grow relative w-[10rem] h-[7rem] rounded-[1.875rem] shadow-md bg-[#fffffa] lg:w-[14.8rem] lg:h-[8rem] lg:min-w-[14rem]">
       <div className="flex justify-between items-center mx-4">
         <h2 className="font-nunito text-[0.9rem] font-semibold mt-3">
           {property}

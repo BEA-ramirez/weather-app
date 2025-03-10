@@ -10,7 +10,7 @@ export default function WeeklyWeather({
   hourForecast: HourlyForecastProps[];
 }) {
   return (
-    <div className="bg-[#fffffa] w-[90%] h-[12rem] shadow-md rounded-[1.5625rem] mt-[2rem] flex flex-col items-center justify-center overflow-hidden p-3 ">
+    <div className="bg-[#fffffa] w-[90%] h-[12rem] shadow-md rounded-[1.5625rem] mt-[2rem] flex flex-col items-center justify-center overflow-hidden p-3 max-w-[55rem]">
       <div className="w-[90%] grid grid-cols-6 gap-5">
         {hourForecast.map((forecast: HourlyForecastProps, index) => {
           return (
