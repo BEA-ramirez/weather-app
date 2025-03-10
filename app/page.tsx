@@ -111,8 +111,8 @@ export default function Page() {
   if (activeTab === 2) {
     return (
       <div className="w-full h-full flex flex-col justify-center items-center  ">
-        <div className="w-full h-[16rem] mb-[-32px] bg-custom bg-cover px-4 pt-4 flex flex-col justify-start">
-          <h1 className="text-[11px] flex items-center gap-1 mt-3 mb-5 justify-between">
+        <div className="w-full h-[16rem] mb-[-2.5rem] bg-custom bg-cover px-4 pt-4 flex flex-col justify-start ">
+          <h1 className="text-[0.6rem] flex items-center gap-1 mt-3 mb-5 justify-between">
             <div className="flex items-center gap-1">
               <Navigation size={10} />
               {weather?.location?.name}, {weather?.location?.country}
@@ -127,7 +127,7 @@ export default function Page() {
               alt="Weather Icon"
               className="w-8"
             />
-            <p className="text-[#e5e5e8]">
+            <p className="text-[#e5e5e8] ">
               {weather?.current?.condition?.text}
             </p>
           </div>
@@ -147,28 +147,36 @@ export default function Page() {
 
   if (activeTab === 1) {
     return (
-      <div className="w-full h-full flex flex-col justify-center items-center md:items-start">
-        <div className="md:h-[100vh] md:w-[25rem] w-full h-[16rem] md:bg- mb-[-32px] bg-custom bg-cover px-4 pt-4 flex flex-col justify-start">
-          <h1 className="text-[11px] flex items-center gap-1 mt-3 mb-5 justify-between">
-            <div className="flex items-center gap-1">
+      <div className="w-full h-full flex md:flex-row flex-col justify-center items-center md:items-start md:justify-start">
+        <div className="md:h-[100vh] md:w-[18rem] md:mr-[-3rem] w-full h-[16rem] mb-[-3rem] bg-custom bg-cover px-4 pt-4 flex flex-col justify-start ">
+          <h1 className="text-[0.6rem] flex items-center gap-1 mt-3 mb-5 justify-between md:hidden">
+            <div className="flex items-center gap-1 mr-3">
               <Navigation size={10} />
               {weather?.location?.name}, {weather?.location?.country}
             </div>
             <SearchPop handleSubmit={handleSearch} />
           </h1>
 
-          <p className="text-5xl">{weather?.current?.temp_c}°</p>
-          <div className="flex items-center justify-start ">
+          <h1 className="w-[9rem] text-[0.6rem] hidden items-center gap-1 mt-3 mb-5 justify-between md:block">
+            <div className="flex items-center gap-1 mr-3">
+              <Navigation size={20} />
+              {weather?.location?.name}, {weather?.location?.country}
+            </div>
+          </h1>
+          <p className="text-5xl md:ml-9 md:text-[3.5rem]">
+            {weather?.current?.temp_c}°
+          </p>
+          <div className="flex items-center justify-start md:mt-3">
             <img
               src={weather?.current?.condition?.icon}
               alt="Weather Icon"
               className="w-8"
             />
-            <p className="text-[#e5e5e8]">
+            <p className="text-[#e5e5e8] md:text-[#000] ">
               {weather?.current?.condition?.text}
             </p>
           </div>
-          <p className="ml-2 text-[11px] mt-[-6px] text-[#e5e5e8]">
+          <p className="ml-2 text-[0.6rem] mt-[-0.3rem] text-[#e5e5e8] md:hidden">
             Today {formattedDate}
           </p>
         </div>
@@ -178,7 +186,13 @@ export default function Page() {
           weeklyForecast={weeklyForecast}
           tempForecast={tempForecast}
         />
-        <DailyWeather otherStyles="sm:hidden md:display" />
+        <DailyWeather
+          otherStyles=" hidden md:w-full md:h-[100vh]"
+          tempForecast={tempForecast}
+          values={weatherConditions}
+          hourlyForecast={hourlyForecast}
+          weeklyForecast={weeklyForecast}
+        />
       </div>
     );
   }
@@ -186,8 +200,8 @@ export default function Page() {
   if (activeTab === 3) {
     return (
       <div className="w-full h-full flex flex-col justify-center items-center  ">
-        <div className="w-full h-[16rem] mb-[-32px] md:bg-center bg-custom bg-cover px-4 pt-4 flex flex-col justify-start">
-          <h1 className="text-[11px] flex items-center gap-1 mt-3 mb-5 justify-between">
+        <div className="w-full h-[16rem] mb-[-3rem] md:bg-center bg-custom bg-cover px-4 pt-4 flex flex-col justify-start">
+          <h1 className="text-[0.6rem] flex items-center gap-1 mt-3 mb-5 justify-between">
             <div className="flex items-center gap-1">
               <Navigation size={10} />
               {weather?.location?.name}, {weather?.location?.country}

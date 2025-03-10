@@ -40,7 +40,7 @@ export function SampleChart({ tempData }: { tempData: TemperatureProps[] }) {
   return (
     <ChartContainer
       config={chartConfig}
-      className="w-full h-[120px]  px-4 mr-0 md:px-20"
+      className="w-full h-[7.5rem]  px-4 mr-0 "
     >
       <AreaChart
         data={tempData}

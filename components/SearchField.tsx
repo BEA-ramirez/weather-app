@@ -75,21 +75,23 @@ export default function SearchField({ handleSubmit }: SearchFieldProps) {
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           placeholder="Enter location"
-          className="text-[14px] border rounded-md p-1 w-[87%] focus:outline-none outline-none"
+          className="text-[0.875rem] border rounded-md p-1 w-[87%] focus:outline-none outline-none"
         />
         <button type="submit" className="w-6">
           <Search size={20} />
         </button>
       </form>
-      {loading && <div className="text-[13px]">Loading suggestions...</div>}
+      {loading && (
+        <div className="text-[0.8125rem]">Loading suggestions...</div>
+      )}
       {suggestions.length > 0 && (
-        <ScrollArea className="h-[300px] pb-8">
+        <ScrollArea className="h-[18.75rem] pb-8">
           <ul className=" absolute z-10 bg-white  border-gray-300 w-full max-h-60 overflow-y-auto">
             {suggestions.map((suggestion, index) => (
               <li
                 key={index}
                 onClick={() => handleSuggestionClick(suggestion)}
-                className="flex flex-col justify-center items-center w-[87%] h-[40px] p-2 hover:bg-gray-200 cursor-pointer text-[12px] "
+                className="flex flex-col justify-center items-center w-[87%] h-[2.5rem] p-2 hover:bg-gray-200 cursor-pointer text-[12px] "
               >
                 {suggestion}
                 <Separator orientation="horizontal" />

@@ -28,11 +28,11 @@ export default function SearchPop({ handleSubmit }: SearchFieldProps) {
   return (
     <Popover>
       <PopoverTrigger asChild>
-        <Button variant="outline">
+        <Button variant="outline" className="w-4 h-8">
           <Search />
         </Button>
       </PopoverTrigger>
-      <PopoverContent className="h-[200px] w-[250px]">
+      <PopoverContent className="h-[12.5rem] w-[15.625rem]">
         <SearchField handleSubmit={handleSubmit} />
       </PopoverContent>
     </Popover>

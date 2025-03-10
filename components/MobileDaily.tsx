@@ -22,19 +22,19 @@ export default function MobileDaily({
   tempForecast: TemperatureProps[];
 }) {
   return (
-    <div className="w-full  rounded-[40px] flex flex-col justify-center items-center  bg-[#fffffa] md:hidden">
-      <div className="w-[90%] p-5 grid grid-cols-6 justify-items-center gap-6">
+    <div className=" w-full h-[26rem] rounded-[2.5rem] flex flex-col justify-center items-center  bg-[#fffffa] md:hidden ">
+      <div className="w-[90%] px-5 pt-3 grid grid-cols-6 justify-items-center gap-6 ">
         {hourlyForecast.map((forecast: HourlyForecastProps, index) => {
           return (
             <div
-              className="w-[50px] h-[50px] flex flex-col justify-center items-center"
+              className="w-[3.125rem] h-[3.125rem] flex flex-col justify-center items-center"
               key={index}
             >
-              <p className="text-[10px]">{forecast?.time}</p>
+              <p className="text-[0.65rem]">{forecast?.time}</p>
               <img
                 src={forecast?.icon}
                 alt={forecast?.condition}
-                className="w-[40px]"
+                className="w-[2.5rem]"
               />
             </div>
           );
@@ -43,7 +43,7 @@ export default function MobileDaily({
       <div className="w-full  mr-0 pr-0 ">
         <SampleChart tempData={tempForecast} />
       </div>
-      <div className="w-full p-5 grid grid-cols-4 justify-items-center gap-y-5">
+      <div className="w-full px-5 py-3 grid grid-cols-4 justify-items-center gap-y-5 ">
         {values.map((value: MobileCardProps, index) => {
           return (
             <MobileCard
