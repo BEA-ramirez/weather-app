@@ -12,10 +12,10 @@ export default function HumidityCard({ value }: { value: number }) {
   return (
     <div>
       <WeatherCard property="Humidity" icon="fi fi-tc-raindrops">
-        <div className="font-semibold text-[1.2rem] ml-[6rem] mt-3 mb-1">
+        <div className="font-semibold lg:text-[1.2rem] lg:ml-[6rem] mt-3 mb-1 text-[1rem] ml-[4.4rem]">
           {temp}%
         </div>
-        <div className="flex gap-1 w-full h-10 justify-center items-center">
+        <div className="flex gap-1 lg:w-full lg:h-10 justify-center items-center h-5 w-[80%] ml-3 lg:ml-0 ">
           <Progress
             value={(firstBar / 30) * 100}
             className="w-[3.75rem] h-[0.7rem]"

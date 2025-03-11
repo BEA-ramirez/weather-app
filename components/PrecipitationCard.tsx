@@ -10,7 +10,7 @@ export default function PrecipitationCard({ value }: { value: number }) {
   return (
     <div>
       <WeatherCard property="Pressure" icon="fi fi-tr-cloud-rain">
-        <h1 className="font-semibold text-[1.2rem] ml-[4rem] mt-3">
+        <h1 className="font-semibold lg:text-[1.2rem] lg:ml-[4rem] mt-3 text-[1rem] ml-[2.5rem]">
           {value} inHg
         </h1>
         <div className="flex gap-1 w-full justify-center items-center px-4 mt-4">

@@ -10,7 +10,10 @@ export default function MobileCard({ property, unit, value }: MobileCardProps) {
         {value}
         {unit}
       </h3>
-      <Progress value={value} className="w-[3.75rem] h-[0.3125rem]" />
+      <Progress
+        value={value}
+        className="w-[3.75rem] h-[0.3125rem] bg-[#cfe8e3]"
+      />
     </div>
   );
 }

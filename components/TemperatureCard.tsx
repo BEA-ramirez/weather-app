@@ -6,7 +6,7 @@ export default function TemperatureCard({ value }: { value: number }) {
   return (
     <div>
       <WeatherCard property="Feels like" icon="fi fi-ts-temperature-high">
-        <h1 className="font-semibold text-[1.3rem] ml-[5rem] mt-2">
+        <h1 className="font-semibold lg:text-[1.3rem] text-[1rem] ml-[3.5rem] lg:ml-[5rem] mt-2">
           {value}°C
         </h1>
         <div className="flex justify-center w-full px-6 mt-3">

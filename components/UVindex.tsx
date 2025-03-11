@@ -10,7 +10,7 @@ export default function UVindex({ value }: { value: number }) {
   return (
     <div>
       <WeatherCard property="UV index" icon="fi fi-tr-brightness">
-        <h1 className="ml-[6.5rem] mt-3 font-semibold text-[1.4rem]">
+        <h1 className="lg:ml-[6.5rem] mt-3 font-semibold lg:text-[1.4rem] text-[1rem] ml-[4.4rem]">
           {value}
         </h1>
         <div className="flex gap-1 px-3 mt-3">

@@ -7,10 +7,12 @@ import UVindex from "@/components/UVindex";
 import TemperatureCard from "@/components/TemperatureCard";
 import RainCard from "@/components/RainCard";
 import WeeklyWeather from "./WeeklyWeather";
+import Notifs from "@/components/Notifs";
 import {
   TemperatureProps,
   HourlyForecastProps,
   WeatherApiResponse,
+  WeeklyForecastProps,
 } from "@/Types/interfaces";
 
 export default function DailyWeather({
@@ -18,19 +20,30 @@ export default function DailyWeather({
   tempForecast,
   hourlyForecast,
   weather,
+  weatherAlerts,
+  weeklyForecast,
 }: {
   otherStyles: string;
   tempForecast: TemperatureProps[];
   hourlyForecast: HourlyForecastProps[];
   weather: WeatherApiResponse | undefined;
+  weatherAlerts: WeatherApiResponse["alerts"]["alert"];
+  weeklyForecast: WeeklyForecastProps[];
 }) {
   return (
     <div
       className={`bg-[#fafaeb] max-w-[67rem] shadow-md p-4 h-full md:flex flex-col justify-center items-center rounded-tl-[1.875rem] rounded-bl-[1.875rem] ${otherStyles}`}
     >
-      <h1 className="self-start text-[0.9rem] font-semibold mt-4 ml-7 lg:text-[1.5rem] lg:ml-[4rem]">
-        {`Welcome back!`}
-      </h1>
+      <div className="flex items-center justify-between w-full pr-10">
+        <h1 className="self-start text-[0.9rem] font-semibold mt-4 ml-7 lg:text-[1.5rem] lg:ml-[4rem]">
+          {`Welcome back!`}
+        </h1>
+        <Notifs
+          weatherAlerts={weatherAlerts || []}
+          weeklyForecast={weeklyForecast}
+        />
+      </div>
+
       <p className="self-start text-[0.8rem] ml-7 lg:text-[1rem] lg:ml-[4rem]">
         Check out today&apos;s weather information
       </p>
@@ -42,7 +55,7 @@ export default function DailyWeather({
       <p className="self-start ml-8 mt-10 mb-3 text-[0.9rem] font-semibold lg:ml-[4rem]">
         More details of today&apos;s weather
       </p>
-      <div className="grid grid-cols-3 gap-y-[2rem] gap-x-[1rem] lg:gap-x-[5rem] ">
+      <div className="grid grid-cols-3 gap-y-[2rem] gap-x-[1rem] lg:gap-x-[5rem] md:gap-x-[2rem]">
         <HumidityCard value={weather?.current?.humidity as number} />
         <WindCard value={weather?.current?.wind_kph as number} />
         <PrecipitationCard value={weather?.current?.pressure_in as number} />

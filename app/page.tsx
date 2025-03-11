@@ -37,7 +37,7 @@ export default function Page() {
     []
   );
   const [tempForecast, setTempForecast] = useState<TemperatureProps[]>([]);
-  const [location, setLocation] = useState<string>("Fort Towson");
+  const [location, setLocation] = useState<string>("Baybay City Philippines");
   const { activeTab } = useNavBarContext();
   const [weatherAlerts, setWeatherAlerts] = useState<
     WeatherApiResponse["alerts"]["alert"]
@@ -115,7 +115,7 @@ export default function Page() {
   if (activeTab === 2) {
     return (
       <div className="w-full h-full flex flex-col justify-center items-center  ">
-        <div className="w-full h-[16rem] mb-[-2.5rem] bg-custom bg-cover px-4 pt-4 flex flex-col justify-start ">
+        <div className="w-full h-[16rem] mb-[-3rem] bg-custom bg-cover px-4 pt-4 flex flex-col justify-start ">
           <h1 className="text-[0.6rem] flex items-center gap-1 mt-3 mb-5 justify-between">
             <div className="flex items-center gap-1">
               <Navigation size={10} />
@@ -139,7 +139,7 @@ export default function Page() {
             Today {formattedDate}
           </p>
         </div>
-        <ScrollArea className="w-full  rounded-[40px] h-[400px] bg-[#fffffa]">
+        <ScrollArea className="w-full pb-8 rounded-[40px] h-[400px] bg-[#fffffa]">
           {weeklyForecast &&
             weeklyForecast.map((forecast, index: number) => (
               <ForecastCard data={forecast} key={index} />
@@ -164,20 +164,20 @@ export default function Page() {
             <SearchPop handleSubmit={handleSearch} />
           </div>
 
-          <h1 className=" w-[9rem] text-[0.6rem] hidden items-center gap-1 mt-3  justify-between md:block">
-            <div className="flex items-center gap-1 mr-3">
+          <h1 className=" w-[9rem] text-[0.6rem] hidden items-center gap-1 mt-3 lg:w-[12rem] justify-between md:block">
+            <div className="flex items-center gap-1 mr-3 lg:text-[0.8rem]">
               <Navigation size={20} />
               {weather?.location?.name}, {weather?.location?.country}
             </div>
           </h1>
-          <p className="text-[0.6rem]  text-[#000] hidden md:block">
+          <p className="text-[0.6rem]  text-[#000] hidden md:block ml-5 lg:text-[0.8rem]">
             Today {formattedDate}
           </p>
 
-          <p className="text-5xl md:ml-9 md:mt-16 md:text-[3.5rem] md:text-[#fff]">
+          <p className="text-5xl md:ml-9 lg:ml-12 md:mt-16 md:text-[3.5rem] md:text-[#fff]">
             {weather?.current?.temp_c}°
           </p>
-          <div className="flex items-center justify-center md:justify-start md:ml-[2rem] md:mt-3">
+          <div className="flex items-center  justify-start md:ml-[0.8rem]  lg:ml-[3.7rem] md:mt-3">
             <img
               src={weather?.current?.condition?.icon}
               alt="Weather Icon"
@@ -201,6 +201,8 @@ export default function Page() {
           tempForecast={tempForecast}
           hourlyForecast={hourlyForecast}
           weather={weather}
+          weatherAlerts={weatherAlerts}
+          weeklyForecast={weeklyForecast}
         />
       </div>
     );

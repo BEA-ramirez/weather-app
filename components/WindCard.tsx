@@ -48,7 +48,7 @@ export default function WindCard({ value }: { value: number }) {
             />
           </RadialBarChart>
         </ChartContainer>
-        <h1 className="z-10 absolute bottom-4 left-[4.8rem] font-semibold ">
+        <h1 className="z-10 absolute lg:bottom-4 lg:left-[4.8rem] font-semibold bottom-2 left-[2.8rem]">
           {value} km/h
         </h1>
       </WeatherCard>
