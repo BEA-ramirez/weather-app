@@ -7,7 +7,11 @@ import UVindex from "@/components/UVindex";
 import TemperatureCard from "@/components/TemperatureCard";
 import RainCard from "@/components/RainCard";
 import WeeklyWeather from "./WeeklyWeather";
-import { TemperatureProps, HourlyForecastProps } from "@/Types/interfaces";
+import {
+  TemperatureProps,
+  HourlyForecastProps,
+  WeatherApiResponse,
+} from "@/Types/interfaces";
 
 export default function DailyWeather({
   otherStyles,
@@ -18,7 +22,7 @@ export default function DailyWeather({
   otherStyles: string;
   tempForecast: TemperatureProps[];
   hourlyForecast: HourlyForecastProps[];
-  weather: any;
+  weather: WeatherApiResponse;
 }) {
   return (
     <div
