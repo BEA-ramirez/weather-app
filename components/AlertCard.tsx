@@ -7,7 +7,7 @@ export default function AlertCard({
   alert: WeatherApiResponse["alerts"]["alert"][0];
 }) {
   return (
-    <div className="w-[90%] flex flex-col border mb-4 p-5 rounded-lg bg-[#afdac6]">
+    <div className="w-[90%] flex flex-col border mb-4 p-5 rounded-lg bg-[#afdac6] ">
       <h2 className="w-fit text-[0.8rem] md:text-[#000] rounded-full bg-[#137773] px-2 mb-3 font-semibold uppercase text-[#f7f1d0]">
         {alert.msgtype}: {alert.event}
       </h2>
