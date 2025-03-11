@@ -141,7 +141,7 @@ export default function Page() {
         </div>
         <ScrollArea className="w-full  rounded-[40px] h-[400px] bg-[#fffffa]">
           {weeklyForecast &&
-            weeklyForecast.map((forecast: any, index: number) => (
+            weeklyForecast.map((forecast, index: number) => (
               <ForecastCard data={forecast} key={index} />
             ))}
         </ScrollArea>
