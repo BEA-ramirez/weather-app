@@ -22,7 +22,7 @@ export default function DailyWeather({
   otherStyles: string;
   tempForecast: TemperatureProps[];
   hourlyForecast: HourlyForecastProps[];
-  weather: WeatherApiResponse;
+  weather: WeatherApiResponse | undefined;
 }) {
   return (
     <div
@@ -43,12 +43,12 @@ export default function DailyWeather({
         More details of today's weather
       </p>
       <div className="grid grid-cols-3 gap-y-[2rem] gap-x-[1rem] lg:gap-x-[5rem] ">
-        <HumidityCard value={weather?.current?.humidity} />
-        <WindCard value={weather?.current?.wind_kph} />
-        <PrecipitationCard value={weather?.current?.pressure_in} />
-        <UVindex value={weather?.current?.uv} />
-        <TemperatureCard value={weather?.current?.feelslike_c} />
-        <RainCard value={weather?.current?.gust_kph} />
+        <HumidityCard value={weather?.current?.humidity as number} />
+        <WindCard value={weather?.current?.wind_kph as number} />
+        <PrecipitationCard value={weather?.current?.pressure_in as number} />
+        <UVindex value={weather?.current?.uv as number} />
+        <TemperatureCard value={weather?.current?.feelslike_c as number} />
+        <RainCard value={weather?.current?.gust_kph as number} />
       </div>
     </div>
   );
