@@ -5,19 +5,16 @@ import { SampleChart } from "./SampleChart";
 import {
   MobileCardProps,
   HourlyForecastProps,
-  WeeklyForecastProps,
   TemperatureProps,
 } from "@/Types/interfaces";
 
 export default function MobileDaily({
   values,
   hourlyForecast,
-  weeklyForecast,
   tempForecast,
 }: {
   values: MobileCardProps[];
   hourlyForecast: HourlyForecastProps[];
-  weeklyForecast: WeeklyForecastProps[];
   tempForecast: TemperatureProps[];
 }) {
   return (

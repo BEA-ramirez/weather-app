@@ -20,12 +20,13 @@ import {
   HourlyForecastProps,
   WeeklyForecastProps,
   MobileCardProps,
+  WeatherApiResponse,
 } from "@/Types/interfaces";
 
 import { Navigation } from "lucide-react";
 
 export default function Page() {
-  const [weather, setWeather] = useState<any>(null);
+  const [weather, setWeather] = useState<WeatherApiResponse>();
   const [weatherConditions, setWeatherConditions] = useState<MobileCardProps[]>(
     []
   );
@@ -37,8 +38,9 @@ export default function Page() {
   );
   const [tempForecast, setTempForecast] = useState<TemperatureProps[]>([]);
   const [location, setLocation] = useState<string>("Fort Towson");
-  const { activeTab, setActiveTab } = useNavBarContext();
-  const [weatherAlerts, setWeatherAlerts] = useState<any>(null);
+  const { activeTab } = useNavBarContext();
+  const [weatherAlerts, setWeatherAlerts] =
+    useState<WeatherApiResponse["alerts"]>();
 
   const handleSearch = async (query: string) => {
     const data = await fetchWeatherForecast(query);
@@ -61,7 +63,7 @@ export default function Page() {
   };
 
   const formattedDate = new Date(
-    weather?.location?.localtime
+    weather?.location?.localtime as string
   ).toLocaleDateString("en-GB", { day: "numeric", month: "short" });
 
   useEffect(() => {
@@ -188,7 +190,6 @@ export default function Page() {
         <MobileDaily
           values={weatherConditions}
           hourlyForecast={hourlyForecast}
-          weeklyForecast={weeklyForecast}
           tempForecast={tempForecast}
         />
         <DailyWeather
@@ -230,14 +231,14 @@ export default function Page() {
         </div>
 
         <ScrollArea className="w-full rounded-[40px] h-[400px] bg-[#fffffa] shadow-lg pb-8 ">
-          {weatherAlerts.alerts.alert.length === 0 && (
+          {weatherAlerts?.alert.length === 0 && (
             <div className="w-full h-[400px] font-semibold flex justify-center items-center">
               No alerts found
             </div>
           )}
           <div className="flex flex-col justify-center items-center mt-6">
-            {weatherAlerts.alerts.alert &&
-              weatherAlerts.alerts.alert.map((alert: any, index: number) => (
+            {weatherAlerts?.alert &&
+              weatherAlerts?.alert.map((alert: any, index: number) => (
                 <AlertCard alert={alert} key={index} />
               ))}
           </div>
