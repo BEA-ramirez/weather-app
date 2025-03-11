@@ -1,6 +1,5 @@
 import React from "react";
 import MobileCard from "./MobileCard";
-import { WeatherChart } from "./WeatherChart";
 import { SampleChart } from "./SampleChart";
 
 import {
