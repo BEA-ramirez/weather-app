@@ -1,29 +1,9 @@
 "use client";
 import React from "react";
 import WeatherCard from "./WeatherCard";
-import { TrendingUp } from "lucide-react";
-import {
-  Label,
-  PolarRadiusAxis,
-  RadialBar,
-  RadialBarChart,
-  ResponsiveContainer,
-} from "recharts";
+import { RadialBar, RadialBarChart } from "recharts";
 
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import {
-  ChartConfig,
-  ChartContainer,
-  ChartTooltip,
-  ChartTooltipContent,
-} from "@/components/ui/chart";
+import { ChartConfig, ChartContainer } from "@/components/ui/chart";
 
 const chartConfig = {
   wind: {
@@ -37,7 +17,6 @@ const chartConfig = {
 } satisfies ChartConfig;
 
 export default function WindCard({ value }: { value: number }) {
-  const totalVisitors = 100;
   const chartData = [{ wind: value, total: 100 - value }];
   return (
     <div>

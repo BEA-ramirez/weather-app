@@ -1,25 +1,8 @@
 "use client";
 
-import { TrendingUp } from "lucide-react";
-import {
-  Area,
-  AreaChart,
-  CartesianGrid,
-  ResponsiveContainer,
-  XAxis,
-  YAxis,
-  LabelList,
-} from "recharts";
-import { WeeklyForecastProps, TemperatureProps } from "@/Types/interfaces";
+import { Area, AreaChart, CartesianGrid, XAxis, YAxis } from "recharts";
+import { TemperatureProps } from "@/Types/interfaces";
 
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
 import {
   ChartConfig,
   ChartContainer,

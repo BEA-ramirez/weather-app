@@ -1,18 +1,16 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { fetchWeather } from "@/utils/fetchWeather";
 import { fetchWeatherForecast } from "@/utils/fetchWeatherForecast";
 import { getWeather } from "@/utils/getWeather";
 import getHourlyForecast from "@/utils/getHourlyForecast";
 import getWeeklyForecast from "@/utils/getWeeklyForecast";
 import getMinMaxTemp from "@/utils/getMinMaxTemp";
 import { fetchWeatherAlerts } from "@/utils/fetchWeatherAlerts";
-import { TemperatureProps, PageProps } from "@/Types/interfaces";
+import { TemperatureProps } from "@/Types/interfaces";
 import { useNavBarContext } from "@/contexts/NavContextProvider";
 import ForecastCard from "@/components/ForecastCard";
 import AlertCard from "@/components/AlertCard";
-import SearchField from "@/components/SearchField";
 import SearchPop from "@/components/SearchPop";
 import MobileDaily from "@/components/MobileDaily";
 import { ScrollArea } from "@/components/ui/scroll-area";
@@ -196,9 +194,7 @@ export default function Page() {
         <DailyWeather
           otherStyles=" hidden md:w-full md:h-[100vh]"
           tempForecast={tempForecast}
-          values={weatherConditions}
           hourlyForecast={hourlyForecast}
-          weeklyForecast={weeklyForecast}
           weather={weather}
         />
       </div>

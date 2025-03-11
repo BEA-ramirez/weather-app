@@ -4,16 +4,6 @@ import React, { useEffect } from "react";
 import { useState } from "react";
 import { Search } from "lucide-react";
 import { Separator } from "./ui/separator";
-import {
-  Command,
-  CommandEmpty,
-  CommandGroup,
-  CommandInput,
-  CommandItem,
-  CommandList,
-  CommandSeparator,
-  CommandShortcut,
-} from "@/components/ui/command";
 import { ScrollArea } from "./ui/scroll-area";
 
 interface SearchFieldProps {

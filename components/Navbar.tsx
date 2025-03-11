@@ -1,4 +1,3 @@
-import { PageProps } from "@/Types/interfaces";
 import React from "react";
 import { useNavBarContext } from "@/contexts/NavContextProvider";
 

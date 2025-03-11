@@ -17,16 +17,12 @@ import {
 export default function DailyWeather({
   otherStyles,
   tempForecast,
-  values,
   hourlyForecast,
-  weeklyForecast,
   weather,
 }: {
   otherStyles: string;
   tempForecast: TemperatureProps[];
-  values: MobileCardProps[];
   hourlyForecast: HourlyForecastProps[];
-  weeklyForecast: WeeklyForecastProps[];
   weather: any;
 }) {
   return (

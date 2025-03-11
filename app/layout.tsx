@@ -2,8 +2,6 @@
 import React from "react";
 import "../style/styles.css";
 import Navbar from "@/components/Navbar";
-import { useState } from "react";
-import { PageProps } from "@/Types/interfaces";
 import NavContextProvider from "@/contexts/NavContextProvider";
 
 interface LayoutProps {
