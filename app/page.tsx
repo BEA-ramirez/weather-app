@@ -139,7 +139,7 @@ export default function Page() {
             Today {formattedDate}
           </p>
         </div>
-        <ScrollArea className="w-full pb-8 rounded-[40px] h-[400px] bg-[#fffffa]">
+        <ScrollArea className="w-full pb-8 rounded-[40px] h-[30rem] bg-[#fffffa]">
           {weeklyForecast &&
             weeklyForecast.map((forecast, index: number) => (
               <ForecastCard data={forecast} key={index} />
@@ -236,7 +236,7 @@ export default function Page() {
           </p>
         </div>
 
-        <ScrollArea className="w-full rounded-[40px] h-[400px] bg-[#fffffa] shadow-lg pb-8 ">
+        <ScrollArea className="w-full rounded-[40px] h-[25rem] bg-[#fffffa] shadow-lg pb-8 ">
           {weatherAlerts && weatherAlerts.length === 0 ? (
             <div className="w-full h-[400px] font-semibold flex justify-center items-center">
               No alerts found
