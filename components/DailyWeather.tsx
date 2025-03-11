@@ -29,10 +29,10 @@ export default function DailyWeather({
       className={`bg-[#fafaeb] max-w-[67rem] shadow-md p-4 h-full md:flex flex-col justify-center items-center rounded-tl-[1.875rem] rounded-bl-[1.875rem] ${otherStyles}`}
     >
       <h1 className="self-start text-[0.9rem] font-semibold mt-4 ml-7 lg:text-[1.5rem] lg:ml-[4rem]">
-        Welcome back!
+        {`Welcome back!`}
       </h1>
       <p className="self-start text-[0.8rem] ml-7 lg:text-[1rem] lg:ml-[4rem]">
-        Check out today's weather information
+        Check out today&apos;s weather information
       </p>
 
       <WeeklyWeather
@@ -40,7 +40,7 @@ export default function DailyWeather({
         hourForecast={hourlyForecast}
       />
       <p className="self-start ml-8 mt-10 mb-3 text-[0.9rem] font-semibold lg:ml-[4rem]">
-        More details of today's weather
+        More details of today&apos;s weather
       </p>
       <div className="grid grid-cols-3 gap-y-[2rem] gap-x-[1rem] lg:gap-x-[5rem] ">
         <HumidityCard value={weather?.current?.humidity as number} />
