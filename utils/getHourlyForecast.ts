@@ -24,7 +24,6 @@ export default function getHourlyForecast(weather: any) {
     icon: forecast.condition.icon,
     condition: forecast.condition.text,
   }));
-  console.log(hourlyForecast);
 
   return hourlyForecast;
 }

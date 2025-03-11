@@ -39,8 +39,9 @@ export default function Page() {
   const [tempForecast, setTempForecast] = useState<TemperatureProps[]>([]);
   const [location, setLocation] = useState<string>("Fort Towson");
   const { activeTab } = useNavBarContext();
-  const [weatherAlerts, setWeatherAlerts] =
-    useState<WeatherApiResponse["alerts"]>();
+  const [weatherAlerts, setWeatherAlerts] = useState<
+    WeatherApiResponse["alerts"]["alert"]
+  >([]);
 
   const handleSearch = async (query: string) => {
     const data = await fetchWeatherForecast(query);
@@ -62,13 +63,16 @@ export default function Page() {
     }
   };
 
-  const formattedDate = new Date(
-    weather?.location?.localtime as string
-  ).toLocaleDateString("en-GB", { day: "numeric", month: "short" });
+  const formattedDate = weather?.location?.localtime
+    ? new Date(weather.location.localtime).toLocaleDateString("en-GB", {
+        day: "numeric",
+        month: "short",
+      })
+    : "N/A";
 
   useEffect(() => {
     handleSearch(location);
-  }, []);
+  }, [location]);
 
   useEffect(() => {
     if (!weather) return; // Ensure weather is not null before calling getWeather
@@ -106,7 +110,7 @@ export default function Page() {
     }, 6 * 60 * 60 * 1000);
 
     return () => clearInterval(interval);
-  });
+  }, [location]);
 
   if (activeTab === 2) {
     return (
@@ -231,17 +235,17 @@ export default function Page() {
         </div>
 
         <ScrollArea className="w-full rounded-[40px] h-[400px] bg-[#fffffa] shadow-lg pb-8 ">
-          {weatherAlerts?.alert.length === 0 && (
+          {weatherAlerts && weatherAlerts.length === 0 ? (
             <div className="w-full h-[400px] font-semibold flex justify-center items-center">
               No alerts found
             </div>
-          )}
-          <div className="flex flex-col justify-center items-center mt-6">
-            {weatherAlerts?.alert &&
-              weatherAlerts?.alert.map((alert: any, index: number) => (
+          ) : (
+            <div className="flex flex-col justify-center items-center mt-6">
+              {weatherAlerts?.map((alert, index) => (
                 <AlertCard alert={alert} key={index} />
               ))}
-          </div>
+            </div>
+          )}
         </ScrollArea>
       </div>
     );

@@ -23,7 +23,6 @@ export default function getMinMaxTemp(weather: any) {
       hour12: true,
     }),
   }));
-  console.log(hourlyForecast);
 
   return hourlyForecast;
 }

@@ -10,7 +10,7 @@ export async function fetchWeatherAlerts(query: string) {
     const data = await response.json();
     console.log(data);
 
-    return data;
+    return data.alerts?.alert || [];
   } catch (error) {
     console.error("Error fetching weather alerts:", error);
     return null;

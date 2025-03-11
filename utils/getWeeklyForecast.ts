@@ -15,6 +15,5 @@ export default function getWeeklyForecast(weather: any) {
     condition: daily.day.condition.text,
     chance: daily.day.daily_chance_of_rain,
   }));
-  console.log(weeklyForecast);
   return weeklyForecast;
 }
